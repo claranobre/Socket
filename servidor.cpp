@@ -8,6 +8,7 @@
 #include <thread>
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 
@@ -15,17 +16,18 @@ using namespace std;
 #define MAXNAME 100
 #define PORTNUM 4325
 
-class Mensagem {
-    public:
-        char msg[MAXMSG];
-        char nome[MAXNAME];
-        int idade;
-        Mensagem();
+struct things_t {
+ std::int32_t update_interval;
+ char led_color;
+ std::int32_t pot_adc;
+ float humidity;
+ float temperature;
 };
 
-Mensagem::Mensagem()
+
+things_t::things_t()
 {
-    idade = 20;
+
 }
 
 void socketHandler(int socketDescriptor,Mensagem mensagem)

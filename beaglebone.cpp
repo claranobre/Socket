@@ -16,17 +16,19 @@ CONFIG -= qt
 LIBS += -pthread
 */
 
-class Mensagem {
-    public:
-        char msg[MAXMSG];
-        char nome[MAXNAME];
-        int idade;
-        Mensagem();
+struct things_t {
+ std::int32_t update_interval;
+ char led_color;
+ std::int32_t pot_adc;
+ float humidity;
+ float temperature;
 };
 
-Mensagem::Mensagem()
+int bbb_dht_read(int type, int gpio_base, int gpio_number, float* humidity, float* temperature);
+
+Things_t::Things_t()
 {
-    idade = 20;
+    
 }
 
 int main(int argc, char *argv[])
@@ -34,10 +36,8 @@ int main(int argc, char *argv[])
     struct sockaddr_in endereco;
     int socketId;
 
-    Mensagem mensagem;
-    strcpy(mensagem.msg,"Olá, tudo bem?");
-    strcpy(mensagem.nome,"MacGyver");
-    mensagem.idade = 100;
+    Things_t things_t;
+
     int bytesenviados;
 
     /*
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     memset(&endereco, 0, sizeof(endereco));
     endereco.sin_family = AF_INET;
     endereco.sin_port = htons(PORTNUM);
-    endereco.sin_addr.s_addr = inet_addr("10.7.171.116");
+    endereco.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     /*
      * Criando o Socket
