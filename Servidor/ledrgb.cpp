@@ -1,9 +1,7 @@
-//Programa : Controle leds BeagleBone
-//Autor : FILIPEFLOP
-
 //Carrega a biblioteca bonescript
 var b = require('bonescript');
 var contador = 0;
+
 //Definicao dos pinos dos leds
 b.pinMode('P8_12', b.OUTPUT);
 b.pinMode('P8_14', b.OUTPUT);

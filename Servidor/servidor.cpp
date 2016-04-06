@@ -8,12 +8,18 @@
 #include <thread>
 #include <iostream>
 #include <vector>
+#include <DHT.cpp>
+#include <ledrgb.cpp>
+#include <potenciometro.cpp>
 
 using namespace std;
 
-#define MAXMSG 1024
-#define MAXNAME 100
-#define PORTNUM 4325
+#define TAM_MAX_MENSAGEM_BOAS_VINDAS   300
+#define TAM_MAX_MENSAGEM_STATUS_LED    100
+#define TAM_MAX_MENSAGEM_CLIENT        2000
+#define NUM_MAX_CONEXAO_CLIENTS        1
+#define GPIO_LED                       2   //GPIO escolhido para colocar o LED.
+#define PORTA_SOCKET_SERVER            8888
 
 struct things_t {
  std::int32_t update_interval; //receber dados do cliente
@@ -23,11 +29,15 @@ struct things_t {
  float temperature;
 };
 
-Mensagem::Mensagem();
-
-things_t::things_t()
-{
-
+things_t::things_t(){
+    int socket_desc , client_sock , c , read_size;           //socket_desc: descriptor do socket servidor
+                                                             //client_sock: descriptor da conexao com o client
+                                                             //read_size: contem o tamanho da estrutura que contem os dados do socket
+    struct sockaddr_in server , client;                      //server: estrutura com informações do socket (lado do servidor)
+                                                             //client: estrutura com informações do socket (lado do client)
+    char client_message[TAM_MAX_MENSAGEM_CLIENT];       //array utilizado como buffer dos bytes enviados pelo client
+    char MensagemBoasvindas[TAM_MAX_MENSAGEM_BOAS_VINDAS];   //array que contem a mensagem de boas vindas (enviada no momento que a conexao e estabelecida)
+    char MensagemStatusLed[TAM_MAX_MENSAGEM_STATUS_LED];     //array que contem a mensagem do status do LED (enviada apos qualquer alteracao do status do LED)
 }
 
 void socketHandler(int socketDescriptor,Mensagem mensagem)
