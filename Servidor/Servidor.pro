@@ -16,7 +16,9 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     servidor.cpp \
     DHT.cpp \
-    update_interval.cpp
+    update_interval.cpp \
+    ledrgb.cpp \
+    potenciometro.cpp
 
 HEADERS  += mainwindow.h \
     time.h
