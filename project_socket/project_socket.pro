@@ -11,6 +11,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = project_socket
 TEMPLATE = app
 
+CONFIG += c++11
+CONFIG -= qt
+LIBS += -pthread
 
 SOURCES += main.cpp\
         mainwindow.cpp \
