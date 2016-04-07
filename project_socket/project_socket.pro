@@ -19,9 +19,17 @@ SOURCES += main.cpp\
     potenciometro.cpp \
     update_interval.cpp \
     servidor.cpp \
-    beaglebone.cpp
+    beaglebone.cpp \
+    Beaglebone_Black/beaglebone.cpp \
+    Beaglebone_Black/bbb_dht_read.c \
+    Beaglebone_Black/bbb_mmio.c \
+    Beaglebone_Black/bbb_dht_read.cpp \
+    Beaglebone_Black/bbb_mmio.cpp
 
 HEADERS  += mainwindow.h \
-    time.h
+    time.h \
+    Beaglebone_Black/bbb_dht_read.h \
+    Beaglebone_Black/bbb_mmio.h \
+    ledrgb.h
 
 FORMS    += mainwindow.ui

@@ -1,3 +1,8 @@
+//FONTE1: http://blog.filipeflop.com/sensores/monitorando-temperatura-e-umidade-com-o-sensor-dht11.html
+//FONTE2: https://learn.adafruit.com/downloads/pdf/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging.pdf
+//FONTE3: https://learn.adafruit.com/setting-up-io-python-library-on-beaglebone-black/using-the-bbio-library
+
+
 #include <cstdio>       //printf
 #include <cstring>      //memset
 #include <cstdlib>      //exit
@@ -27,8 +32,6 @@ struct things_t {
  float humidity;
  float temperature;
 };
-
-int bbb_dht_read(int type, int gpio_base, int gpio_number, float* humidity, float* temperature);
 
 Things_t::Things_t()
 {
