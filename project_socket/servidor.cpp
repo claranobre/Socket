@@ -8,15 +8,10 @@
 #include <thread>
 #include <iostream>
 #include <vector>
-#include <DHT.cpp>
-#include <ledrgb.cpp>
-#include <potenciometro.cpp>
 
 using namespace std;
 
-#define TAM_MAX_MENSAGEM_BOAS_VINDAS   300
 #define TAM_MAX_MENSAGEM_STATUS_LED    100
-#define TAM_MAX_MENSAGEM_CLIENT        2000
 #define NUM_MAX_CONEXAO_CLIENTS        1
 #define GPIO_LED                       2   //GPIO escolhido para colocar o LED.
 #define PORTA_SOCKET_SERVER            8888
@@ -33,40 +28,21 @@ things_t::things_t(){
     int socket_desc , client_sock , c , read_size;           //socket_desc: descriptor do socket servidor
                                                              //client_sock: descriptor da conexao com o client
                                                              //read_size: contem o tamanho da estrutura que contem os dados do socket
-    struct sockaddr_in server , client;                      //server: estrutura com informações do socket (lado do servidor)
-                                                             //client: estrutura com informações do socket (lado do client)
-    char client_message[TAM_MAX_MENSAGEM_CLIENT];       //array utilizado como buffer dos bytes enviados pelo client
+    struct sockaddr_in server , beaglebone;                  //server: estrutura com informações do socket (lado do servidor)
+                                                             //beaglebone: estrutura com informações do socket (lado do client)
+    char client_message[TAM_MAX_MENSAGEM_CLIENT];            //array utilizado como buffer dos bytes enviados pelo client
     char MensagemBoasvindas[TAM_MAX_MENSAGEM_BOAS_VINDAS];   //array que contem a mensagem de boas vindas (enviada no momento que a conexao e estabelecida)
     char MensagemStatusLed[TAM_MAX_MENSAGEM_STATUS_LED];     //array que contem a mensagem do status do LED (enviada apos qualquer alteracao do status do LED)
 }
 
-void socketHandler(int socketDescriptor,Mensagem mensagem)
+void socketHandler(int socketDescriptor)
 {
-    int byteslidos;
-
     //Verificando erros
     if ( socketDescriptor == -1)
     {
         printf("Falha ao executar accept()");
         exit(EXIT_FAILURE);
     }
-
-    //receber uma msg do cliente
-    //printf("Servidor vai ficar esperando uma mensagem\n");
-    byteslidos = recv(socketDescriptor,&mensagem,sizeof(mensagem),0);
-
-    if (byteslidos == -1)
-    {
-        printf("Falha ao executar recv()");
-        exit(EXIT_FAILURE);
-    }
-    else if (byteslidos == 0)
-    {
-        printf("Cliente finalizou a conexão\n");
-        exit(EXIT_SUCCESS);
-    }
-
-    printf("Servidor recebeu a seguinte msg do cliente [%s:%d]: %s \n",mensagem.nome,mensagem.idade,mensagem.msg);
 
     close(socketDescriptor);
 }
@@ -82,9 +58,6 @@ int main(int argc, char *argv[])
     struct sockaddr_in enderecoCliente;
     socklen_t tamanhoEnderecoCliente = sizeof(struct sockaddr);
     int conexaoClienteId;
-
-    //mensagem enviada pelo cliente
-    Mensagem mensagem;
 
     /*
      * Configurações do endereço
@@ -136,7 +109,7 @@ int main(int argc, char *argv[])
         printf("Servidor: recebeu conexão de %s\n", inet_ntoa(enderecoCliente.sin_addr));
 
         //disparar a thread
-        thread t(socketHandler,conexaoClienteId,mensagem);
+        thread t(socketHandler,conexaoClienteId);
         t.detach();
     }
 
