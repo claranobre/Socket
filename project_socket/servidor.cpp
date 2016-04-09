@@ -9,12 +9,25 @@
 #include <iostream>
 #include <vector>
 
+#define MAXMSG 1024
+#define MAXNAME 100
+#define PORTNUM 4325
+
 using namespace std;
 
 #define TAM_MAX_MENSAGEM_STATUS_LED    100
 #define NUM_MAX_CONEXAO_CLIENTS        1
 #define GPIO_LED                       2   //GPIO escolhido para colocar o LED.
 #define PORTA_SOCKET_SERVER            8888
+
+/*class Mensagem {
+    public:
+        char msg[MAXMSG];
+        char nome[MAXNAME];
+        int idade;
+        Mensagem();
+};
+*/
 
 struct things_t {
  std::int32_t update_interval; //receber dados do cliente
@@ -24,6 +37,12 @@ struct things_t {
  float temperature;
 };
 
+/*Mensagem::Mensagem()
+{
+    idade = 20;
+}
+*/
+
 things_t::things_t(){
     int socket_desc , client_sock , c , read_size;           //socket_desc: descriptor do socket servidor
                                                              //client_sock: descriptor da conexao com o client
@@ -31,7 +50,7 @@ things_t::things_t(){
     struct sockaddr_in server , beaglebone;                  //server: estrutura com informações do socket (lado do servidor)
                                                              //beaglebone: estrutura com informações do socket (lado do client)
     char client_message[TAM_MAX_MENSAGEM_CLIENT];            //array utilizado como buffer dos bytes enviados pelo client
-    char MensagemBoasvindas[TAM_MAX_MENSAGEM_BOAS_VINDAS];   //array que contem a mensagem de boas vindas (enviada no momento que a conexao e estabelecida)
+    //char MensagemBoasvindas[TAM_MAX_MENSAGEM_BOAS_VINDAS];   //array que contem a mensagem de boas vindas (enviada no momento que a conexao e estabelecida)
     char MensagemStatusLed[TAM_MAX_MENSAGEM_STATUS_LED];     //array que contem a mensagem do status do LED (enviada apos qualquer alteracao do status do LED)
 }
 
@@ -98,7 +117,7 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    //servidor ficar em um loop infinito
+    //Servidor ficar em um loop infinito
     while(1)
     {
         printf("Servidor: esperando conexões clientes\n");

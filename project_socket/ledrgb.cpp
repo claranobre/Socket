@@ -46,11 +46,11 @@ var b = require('bonescript');
 var contador = 0;
 
 //Definicao dos pinos dos leds
-b.pinMode('P8_12', b.OUTPUT);
-b.pinMode('P8_14', b.OUTPUT);
-b.pinMode('P8_16', b.OUTPUT);
+b.pinMode('P9_12', b.OUTPUT);
+b.pinMode('P9_14', b.OUTPUT);
+b.pinMode('P9_16', b.OUTPUT);
 
-setInterval(check,2000);
+setInterval(check,4000);
 
 function check()
 {
@@ -62,23 +62,23 @@ function check()
    if (contador === 0)
    {
      console.log("Led Vermelho ligado !");
-     b.digitalWrite('P8_12', b.HIGH);
-     b.digitalWrite('P8_14', b.LOW);
-     b.digitalWrite('P8_16', b.LOW);
+     b.digitalWrite('P9_12', b.HIGH);
+     b.digitalWrite('P9_14', b.LOW);
+     b.digitalWrite('P9_16', b.LOW);
    }
 
    if (contador === 1)
    {
      console.log("Led verde ligado !");
-     b.digitalWrite('P8_12', b.LOW);
-     b.digitalWrite('P8_14', b.HIGH);
-     b.digitalWrite('P8_16', b.LOW);
+     b.digitalWrite('P9_12', b.LOW);
+     b.digitalWrite('P9_14', b.HIGH);
+     b.digitalWrite('P9_16', b.LOW);
    }
    if (contador === 2)
    {
      console.log("Led amarelo ligado !");
-     b.digitalWrite('P8_12', b.LOW);
-     b.digitalWrite('P8_14', b.LOW);
-     b.digitalWrite('P8_16', b.HIGH);
+     b.digitalWrite('P9_12', b.LOW);
+     b.digitalWrite('P9_14', b.LOW);
+     b.digitalWrite('P9_16', b.HIGH);
    }
 }

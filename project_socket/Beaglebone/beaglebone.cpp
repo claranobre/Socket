@@ -5,10 +5,6 @@
 #include <arpa/inet.h>  //inet_addr
 #include <sys/socket.h> //socket
 #include <unistd.h>     //close
-#include <DHT.cpp>
-#include <ledrgb.cpp>
-#include <potenciometro.cpp>
-#include <update_interval.cpp>
 
 #define MAXNAME 100
 #define PORTNUM 4325
