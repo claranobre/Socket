@@ -1,4 +1,5 @@
 # Projeto sobre Socket's SO 2ª unidade 
+@Autores: Ana Clara Nobre(github.com/claranobre) e Ícaro Heitor(github.com/icarotangara)
 
 Fontes de pesquisa:
 *1 http://blog.filipeflop.com/sensores/monitorando-temperatura-e-umidade-com-o-sensor-dht11.html*
